@@ -1,10 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'openjdk:11'
-            label 'agent1'
-        }
-    }
+    agent any #{
+        #docker {
+        #   image 'openjdk:11'
+        #   label 'agent1'
+        #}
+    #}
 	stages {
         stage('Create') {
             steps {
