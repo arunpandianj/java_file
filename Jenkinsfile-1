@@ -1,0 +1,36 @@
+pipeline {
+    agent {
+        docker {
+            image 'openjdk:11'
+            label 'agent1'  // This ensures the task runs on your Docker agent named "agent1"
+        }
+    }
+    stages {
+        stage('Create Java Program') {
+            steps {
+                script {
+                bat 'java --version'
+                    }
+                }
+            }
+        }
+
+        stage('Compile Java Program') {
+            steps {
+                bat 'javac Hello.java'
+            }
+        }
+
+        stage('Run Java Program') {
+            steps {
+                bat 'java Hello'
+            }
+        }
+
+        stage('Archive Compiled Files') {
+            steps {
+                archiveArtifacts artifacts: '*.class', fingerprint: true
+            }
+        }
+    }
+}
