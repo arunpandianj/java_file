@@ -6,12 +6,20 @@ pipeline {
         timestamps()                            // Add timestamps to console output
         disableConcurrentBuilds()               // Prevent concurrent builds
     }
+    parameters {
+        string(name: 'USERNAME', defaultValue: 'guest', description: 'Enter your username')
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy after build?')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Select environment')
+    }
     stages {
         stage('Build') {
             steps {
                 script {
-                  bat 'echo Starting Hello World Pipeline'
-                  bat 'javac Hello.java'
+                echo "Username: ${params.USERNAME}"
+                echo "Deploy: ${params.DEPLOY}"
+                echo "Environment: ${params.ENVIRONMENT}"
+                bat 'echo Starting Hello World Pipeline'
+                bat 'javac Hello.java'
                 }
             }
         }
