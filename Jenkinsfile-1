@@ -6,24 +6,32 @@ pipeline {
         	}
     	}
 stages {
-        stage('Create') {
+        stage('Install') {
             steps {
                 script {
-                	bat 'java --version'
+                	sh 'apt-get update'
+			sh 'apt-get install -y git'
+                    }
+                }
+            }
+	stage('Create') {
+            steps {
+                script {
+                	sh 'java --version'
                     }
                 }
             }
         stage('Compile') {
             steps {
                 script {
-                	bat 'java --version'
+                	sh 'javac Hello.java'
                     }
                 }
             }
         stage('Run') {
             steps {
                 script {
-                	bat 'java --version'
+                	bat 'java Hello'
                     }
                 }
             }
