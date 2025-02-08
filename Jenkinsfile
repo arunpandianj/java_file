@@ -1,6 +1,11 @@
 pipeline {
-    agent { label 'agent1' }
-
+    agent any
+    options {
+        timeout(time: 5, unit: 'MINUTES')       // Pipeline will timeout after 5 minutes
+        retry(2)                                // Retry the pipeline twice if it fails
+        timestamps()                            // Add timestamps to console output
+        disableConcurrentBuilds()               // Prevent concurrent builds
+    }
     stages {
         stage('Build') {
             steps {
