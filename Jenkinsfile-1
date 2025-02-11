@@ -1,0 +1,28 @@
+pipeline {
+    agent { label 'java_agent' }
+
+    stages {
+        stage('Configuration') {
+            steps {
+                sh 'rm -rf java_file || true'
+                sh 'git --version'
+                sh 'java --version'
+            }
+        }
+        stage('Compile') {
+            steps {
+                dir('java_file') {
+                    sh 'javac Hello.java'
+                    echo "Compilation successful."
+                }
+            }
+        }
+        stage('Run') {
+            steps {
+                dir('java_file') {
+                    sh 'java Hello'
+                }
+            }
+        }
+    }
+}
