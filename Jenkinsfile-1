@@ -2,12 +2,6 @@ pipeline {
     agent { label 'java_agent' }
 
     stages {
-        stage('Configuration') {
-            steps {
-                sh 'git --version'
-                sh 'java --version'
-            }
-        }
         stage('Compile') {
             steps {
                 dir('java_file') {
