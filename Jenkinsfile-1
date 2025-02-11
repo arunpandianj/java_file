@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Configuration') {
             steps {
-                sh 'rm -rf java_file || true'
                 sh 'git --version'
                 sh 'java --version'
             }
